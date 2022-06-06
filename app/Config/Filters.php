@@ -8,6 +8,8 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+// use app\Filters\Auth;
+// use app\Filters\Cors;
 
 class Filters extends BaseConfig
 {
@@ -23,6 +25,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'cors'     => \App\Filters\Cors::class,
+        'auth'     =>     \App\Filters\Auth::class,
     ];
 
     /**
@@ -33,6 +37,7 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
+            'cors',
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
@@ -68,5 +73,17 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+        'auth' => [
+            'before' => [
+                'berita/',
+                'berita/create',
+                'users/',
+                'profile',
+                'berkas',
+                'fradmin', 'map', 'sliders', 'pelayanan', 'layout',
+                'register'
+            ],
+        ],
+    ];
 }

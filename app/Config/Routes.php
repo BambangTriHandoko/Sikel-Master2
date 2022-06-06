@@ -17,10 +17,11 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Homes');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+$routes->setAutoRoute(true);
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
@@ -35,8 +36,26 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-
+$routes->get('/', 'Homes::index');
+$routes->get('/', 'Homes::index');
+$routes->get('/fradmin', 'admin\Fradmin::index');
+$routes->get('/users', 'Users::index');
+$routes->get('/login', 'login::index');
+$routes->post('/login/auth', 'login::auth');
+$routes->get('/profile', 'Profile::index');
+$routes->get('/berkas', 'Berkas::index');
+$routes->get('/berita', 'Berita::index');
+$routes->post('/data_kel/import', 'Data_kel::import');
+$routes->post('/data_kel/data', 'Data_kel::data');
+$routes->get('/peta', 'peta::index');
+// $routes->get('/peta/chart', 'peta::chart');
+$routes->resource('Kependudukan');
+$routes->resource('integrate');
+$routes->resource('integratependidikan');
+$routes->resource('integrateagama');
+$routes->resource('integratepernikahan');
+$routes->resource('integratepekerjaan');
+$routes->resource('kecamatan');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
